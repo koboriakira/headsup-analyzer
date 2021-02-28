@@ -1,3 +1,33 @@
+pub mod handrange {
+    use serde::{Deserialize, Serialize};
+
+    #[derive(Serialize, Deserialize, Debug)]
+    pub struct Patterns {
+        patterns: Vec<HashMap<String, String>>,
+    }
+
+    use std::{collections::HashMap, fs::File, io::BufReader};
+
+    pub fn load_json() {
+        let result = File::open("range.json")
+            .and_then(|file| Ok(BufReader::new(file)))
+            .and_then(|reader| {
+                let deserialized: Patterns = serde_json::from_reader(reader).unwrap();
+                Ok(deserialized)
+            });
+        match result {
+            Ok(patterns) => patterns
+                .patterns
+                .into_iter()
+                .for_each(|p| println!("{:?}", p)),
+            Err(any) => {
+                // dbg!(any);
+                println!("{:#?}", any);
+            }
+        };
+    }
+}
+
 pub mod position {
     use std::str::FromStr;
     #[derive(Debug)]
