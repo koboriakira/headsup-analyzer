@@ -1,5 +1,3 @@
-use std::fmt::Debug;
-
 use headsup_analyzer::{argparse::arg_parse, cards::Cards, player::Player};
 use rust_poker::hand_range::get_card_mask;
 fn main() {
@@ -18,7 +16,7 @@ fn main() {
         opts.villain_action.to_hero_action(),
     )
     .unwrap();
-    println!("{}", &hero.hand_range.hands);
+
     let test_combo = &hero.hand_range.hands.first().unwrap();
     println!("{}", test_combo);
     println!("{:?}", test_combo);
