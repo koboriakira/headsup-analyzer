@@ -1,3 +1,5 @@
+pub mod analyse;
+
 pub mod player;
 
 pub mod position;
@@ -8,6 +10,7 @@ pub mod cards;
 
 pub mod argparse;
 
+pub mod madehand;
 #[cfg(test)]
 mod tests {
     #[test]
