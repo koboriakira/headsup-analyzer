@@ -1,6 +1,6 @@
 use rs_poker::core::Value;
 
-#[derive(Debug, PartialEq, PartialOrd)]
+#[derive(Debug, PartialEq, PartialOrd, Eq, Ord)]
 pub enum MadeHand {
     HighCard(Value, Value, Value, Value, Value),
     OnePair(Value, Value, Value, Value),

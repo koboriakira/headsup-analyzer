@@ -56,10 +56,25 @@ impl FromStr for Cards {
 
 impl Cards {
     pub fn analyze_madehand(&self) -> Result<MadeHand, &'static str> {
-        if self.cards.len() != 5 {
+        if self.cards.len() < 5 {
             return Err("Invalid cards length");
         }
 
+        self.combination()
+            .into_iter()
+            .try_fold(vec![], |mut acc, cards| {
+                cards.sub_analyze().and_then(|madehand| {
+                    acc.push(madehand);
+                    Ok(acc)
+                })
+            })
+            .and_then(|madehands| match madehands.into_iter().max() {
+                Some(max) => Ok(max),
+                None => Err("No madehands."),
+            })
+    }
+
+    fn sub_analyze(&self) -> Result<MadeHand, &'static str> {
         let suited = self.suits().len() == 1;
         let rank_as_count = self.count_rank();
         let two_card = rank_as_count.get(&2);
@@ -101,6 +116,18 @@ impl Cards {
             _ => MadeHand::HighCard(kickers[0], kickers[1], kickers[2], kickers[3], kickers[4]),
         };
         Ok(madehand)
+    }
+
+    fn combination(&self) -> Vec<Cards> {
+        self.cards
+            .clone()
+            .into_iter()
+            .combinations(5)
+            .map(|cards| Cards {
+                text: self.text.clone(),
+                cards: cards,
+            })
+            .collect()
     }
 
     fn suits(&self) -> HashSet<Suit> {

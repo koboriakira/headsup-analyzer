@@ -16,8 +16,8 @@ fn main() {
     )
     .unwrap();
 
-    let five_cards: Cards = opts.hand.cards + opts.board.cards.clone();
-    let madehand = five_cards.analyze_madehand();
+    let available_cards: Cards = opts.hand.cards + opts.board.cards.clone();
+    let madehand = available_cards.analyze_madehand();
     println!("{:?}", madehand);
 
     analyse(hero.hand_range, villain.hand_range, &opts.board);
