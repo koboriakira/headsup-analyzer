@@ -1,9 +1,8 @@
 use headsup_analyzer::{analyse::analyse, argparse::arg_parse, cards::Cards, player::Player};
-use rust_poker::hand_range::get_card_mask;
 fn main() {
     let opts = arg_parse();
     let hero = Player::new(
-        Some(opts.hand.0),
+        Some(opts.hand.hand),
         opts.hero_position.clone(),
         opts.villain_positon.clone(),
         opts.villain_action.clone(),
@@ -16,6 +15,10 @@ fn main() {
         opts.villain_action.to_hero_action(),
     )
     .unwrap();
+
+    let five_cards: Cards = opts.hand.cards + opts.board.cards.clone();
+    let madehand = five_cards.analyze_madehand();
+    println!("{:?}", madehand);
 
     analyse(hero.hand_range, villain.hand_range, &opts.board);
 }

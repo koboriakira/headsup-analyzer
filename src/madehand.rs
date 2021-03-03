@@ -1,14 +1,16 @@
+use rs_poker::core::Value;
+
 #[derive(Debug, PartialEq, PartialOrd)]
 pub enum MadeHand {
-    HighCard(u8, u8, u8, u8, u8),
-    OnePair(u8, u8, u8, u8),
-    TwoPair(u8, u8, u8),
-    ThreeCard(u8, u8, u8),
-    Straight(u8),
-    Flush(u8),
-    FullHouse(u8, u8),
-    FourCard(u8, u8),
-    StraightFlush(u8),
+    HighCard(Value, Value, Value, Value, Value),
+    OnePair(Value, Value, Value, Value),
+    TwoPair(Value, Value, Value),
+    ThreeCard(Value, Value, Value),
+    Straight(Value),
+    Flush(Value),
+    FullHouse(Value, Value),
+    FourCard(Value, Value),
+    StraightFlush(Value),
     RoyalStraightFlush,
 }
 
