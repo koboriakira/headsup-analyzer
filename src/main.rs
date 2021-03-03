@@ -3,20 +3,19 @@ use rust_poker::hand_range::get_card_mask;
 fn main() {
     let opts = arg_parse();
     let hero = Player::new(
-        opts.cards,
+        Some(opts.hand.0),
         opts.hero_position.clone(),
         opts.villain_positon.clone(),
         opts.villain_action.clone(),
     )
     .unwrap();
     let villain = Player::new(
-        Cards::new(0),
+        None,
         opts.villain_positon,
         opts.hero_position,
         opts.villain_action.to_hero_action(),
     )
     .unwrap();
-    // println!("{:?}", &villain);
-    let public_cards = get_card_mask(&opts.board);
-    analyse(hero.hand_range, villain.hand_range, public_cards);
+
+    analyse(hero.hand_range, villain.hand_range, &opts.board);
 }

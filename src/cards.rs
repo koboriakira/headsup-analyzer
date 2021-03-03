@@ -1,3 +1,4 @@
+use rs_poker::core::Hand;
 use rust_poker::hand_range::get_card_mask;
 use std::str::FromStr;
 #[derive(Debug)]

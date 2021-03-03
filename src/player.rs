@@ -1,12 +1,13 @@
 use crate::{action::Action, cards::Cards, position::Position};
 use anyhow::{Context, Result};
+use rs_poker::core::Hand;
 use rust_poker::hand_range::HandRange;
 use serde::{Deserialize, Serialize};
 use std::{fs::File, io::BufReader, str::FromStr};
 
 #[derive(Debug)]
 pub struct Player {
-    cards: Cards,
+    hand: Option<Hand>,
     pub hand_range: HandRange,
     action: Action,
     position: Position,
@@ -27,7 +28,7 @@ pub struct Pattern {
 
 impl Player {
     pub fn new(
-        cards: Cards,
+        hand: Option<Hand>,
         hero_position: Position,
         villain_positon: Position,
         villain_action: Action,
@@ -36,7 +37,7 @@ impl Player {
             collect_position_and_action(hero_position, villain_positon, villain_action);
         get_hand_range(&hero_position, &villain_positon, &hero_action).and_then(|hand_range| {
             Ok(Self {
-                cards,
+                hand,
                 hand_range,
                 action: hero_action,
                 position: hero_position,
