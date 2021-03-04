@@ -7,7 +7,7 @@ use std::{
 use anyhow::Result;
 use rs_poker::core::{Card, Suit, Value};
 
-use crate::madehand::MadeHand;
+use crate::{drawhand::DrawHand, madehand::MadeHand};
 #[derive(Debug, Clone)]
 pub struct Cards {
     pub cards: Vec<Card>,
@@ -75,7 +75,7 @@ impl Cards {
     }
 
     fn sub_analyze(&self) -> Result<MadeHand, &'static str> {
-        let suited = self.suits().len() == 1;
+        let suited = self.suited();
         let rank_as_count = self.count_rank();
         let two_card = rank_as_count.get(&2);
         let three_card = rank_as_count.get(&3);
@@ -118,6 +118,34 @@ impl Cards {
         Ok(madehand)
     }
 
+    pub fn analyse_drawhand(&self) -> Vec<DrawHand> {
+        let rest_card_length = 7 - self.cards.len();
+        if rest_card_length == 0 {
+            return vec![];
+        }
+
+        let init: Vec<DrawHand> = vec![];
+        self.combination()
+            .into_iter()
+            .map(|cards| cards.sub_analyse_drawhand(rest_card_length))
+            .fold(init, |mut acc, mut drawhands| {
+                acc.append(&mut drawhands);
+                acc
+            })
+    }
+
+    fn sub_analyse_drawhand(&self, rest_card_length: usize) -> Vec<DrawHand> {
+        let mut result: Vec<DrawHand> = vec![];
+        let flash_draw = self.suits().into_iter().find(|(s, count)| *count == 4);
+        let backdoor_flash_draw = self.suits().into_iter().find(|(s, count)| *count == 3);
+        match (flash_draw, backdoor_flash_draw) {
+            (Some(d), _) => result.push(DrawHand::FlashDraw(d.0)),
+            (None, Some(d)) => result.push(DrawHand::BackdoorFlashDraw(d.0)),
+            _ => {}
+        };
+        result
+    }
+
     fn combination(&self) -> Vec<Cards> {
         self.cards
             .clone()
@@ -130,16 +158,27 @@ impl Cards {
             .collect()
     }
 
-    fn suits(&self) -> HashSet<Suit> {
+    fn suited(&self) -> bool {
+        self.suits().keys().len() == 1
+    }
+
+    fn suits(&self) -> HashMap<Suit, u32> {
         self.cards
             .clone()
             .into_iter()
-            .map(|c| c.suit)
-            .collect::<HashSet<Suit>>()
+            .fold(HashMap::new(), |mut acc, c| {
+                *acc.entry(c.suit).or_insert_with(|| 0) += 1;
+                acc
+            })
     }
 
     fn ranks(&self) -> Vec<Value> {
-        self.cards.clone().into_iter().map(|c| c.value).collect()
+        self.cards
+            .clone()
+            .into_iter()
+            .map(|c| c.value)
+            .sorted()
+            .collect()
     }
 
     fn count_rank(&self) -> HashMap<u32, Vec<Value>> {
@@ -167,20 +206,20 @@ impl Cards {
 
     fn straight(&self) -> Option<MadeHand> {
         let ranks = self.ranks();
-        let mut lowest = false;
-        let result = !ranks.windows(2).any(|x| match x[0] as i32 - x[1] as i32 {
-            // In the case 'A' and '5'
-            9 => {
-                lowest = true;
-                false
-            }
-            1 => false,
-            _ => true,
-        });
-        match (result, lowest) {
-            (true, true) => Some(MadeHand::Straight(Value::Five)),
-            (true, false) => Some(MadeHand::Straight(ranks[0])),
-            _ => None,
+        let is_straight = ranks.windows(2).all(|x| is_connect_values(x[0], x[1]));
+        if !is_straight {
+            return None;
         }
+        match (ranks.first(), ranks.last()) {
+            (Some(Value::Two), Some(Value::Ace)) => Some(MadeHand::Straight(Value::Five)),
+            _ => Some(MadeHand::Straight(*ranks.last().unwrap())),
+        }
+    }
+}
+
+fn is_connect_values(a: Value, b: Value) -> bool {
+    match (a, b) {
+        (Value::Ace, Value::Five) | (Value::Five, Value::Ace) => return true,
+        (a, b) => (a as i32 - b as i32).abs() == 1,
     }
 }

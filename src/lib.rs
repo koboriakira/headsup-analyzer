@@ -1,3 +1,5 @@
+pub mod drawhand;
+
 pub mod board;
 
 pub mod analyse;
