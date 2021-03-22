@@ -1,8 +1,5 @@
 use itertools::Itertools;
-use std::{
-    collections::{HashMap, HashSet},
-    str::FromStr,
-};
+use std::{collections::HashMap, str::FromStr};
 
 use anyhow::Result;
 use rs_poker::core::{Card, Suit, Value};

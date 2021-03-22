@@ -167,6 +167,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
 
 [[package]]
+name = "fastdivide"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2028cbf6ff4368caa5f9b1f00f05984096af857cc74c8a875a54c578dcc6efac"
+
+[[package]]
 name = "fuchsia-cprng"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -518,17 +524,19 @@ dependencies = [
 
 [[package]]
 name = "rust_poker"
-version = "0.1.10"
+version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4deffbf2fdc58d67454e6b997c02eaa8cf4671644df21cfdfbf2d8b93cf2405c"
+checksum = "43244ef090ecb2d3514dcdc836bc7a5aed059aebea309bf88845a961d0577e52"
 dependencies = [
  "crossbeam",
+ "fastdivide",
  "gen_eval_table",
  "lazy_static",
  "rand 0.7.3",
  "read_write",
  "serde",
  "serde_json",
+ "thiserror",
 ]
 
 [[package]]
@@ -607,6 +615,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "203008d98caf094106cfaba70acfed15e18ed3ddb7d94e49baec153a2b462789"
 dependencies = [
  "unicode-width",
+]
+
+[[package]]
+name = "thiserror"
+version = "1.0.24"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "1.0.24"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
