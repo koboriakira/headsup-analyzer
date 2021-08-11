@@ -131,10 +131,10 @@ impl Cards {
             })
     }
 
-    fn sub_analyse_drawhand(&self, rest_card_length: usize) -> Vec<DrawHand> {
+    fn sub_analyse_drawhand(&self, _rest_card_length: usize) -> Vec<DrawHand> {
         let mut result: Vec<DrawHand> = vec![];
-        let flash_draw = self.suits().into_iter().find(|(s, count)| *count == 4);
-        let backdoor_flash_draw = self.suits().into_iter().find(|(s, count)| *count == 3);
+        let flash_draw = self.suits().into_iter().find(|(_s, count)| *count == 4);
+        let backdoor_flash_draw = self.suits().into_iter().find(|(_s, count)| *count == 3);
         match (flash_draw, backdoor_flash_draw) {
             (Some(d), _) => result.push(DrawHand::FlashDraw(d.0)),
             (None, Some(d)) => result.push(DrawHand::BackdoorFlashDraw(d.0)),
