@@ -14,17 +14,10 @@ pub enum MadeHand {
     RoyalStraightFlush,
 }
 
-#[cfg(test)]
-mod tests {
-    use rust_poker::hand_range::HandRange;
+// #[cfg(test)]
+// mod tests {
+//     use rs_poker::core::Value;
+//     use rust_poker::hand_range::HandRange;
 
-    use super::MadeHand;
-
-    #[test]
-    fn test_madehand() {
-        assert_eq!(
-            MadeHand::HighCard(0, 0, 0, 0, 0),
-            MadeHand::HighCard(0, 0, 0, 0, 0)
-        );
-    }
-}
+//     use super::MadeHand;
+// }
