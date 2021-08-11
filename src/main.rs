@@ -1,22 +1,9 @@
-use headsup_analyzer::{analyse::analyse, argparse::arg_parse, cards::Cards, player::Player};
+use headsup_analyzer::{analyse::analyse, argparse::arg_parse, cards::Cards};
 fn main() {
     let opts = arg_parse();
-    let hero = Player::new(
-        Some(opts.hand.hand),
-        opts.hero_position.clone(),
-        opts.villain_positon.clone(),
-        opts.villain_action.clone(),
-    )
-    .unwrap();
-    let villain = Player::new(
-        None,
-        opts.villain_positon,
-        opts.hero_position,
-        opts.villain_action.to_hero_action(),
-    )
-    .unwrap();
+    let (hero, villain) = opts.create_hero_and_villain().unwrap();
 
-    let available_cards: Cards = opts.hand.cards + opts.board.cards.clone();
+    let available_cards: Cards = opts.create_available_cards().unwrap();
     let madehand = available_cards.analyze_madehand();
     println!("{:?}", madehand);
 

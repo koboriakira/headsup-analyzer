@@ -3,7 +3,7 @@ use std::str::FromStr;
 use clap::Clap;
 use rs_poker::core::Hand;
 
-use crate::{action::Action, board::Board, cards::Cards, position::Position};
+use crate::{action::Action, board::Board, cards::Cards, player::Player, position::Position};
 #[derive(Clap, Debug)]
 #[clap(
     name = "Heads-Up Analyzer",
@@ -22,6 +22,31 @@ pub struct Opts {
     pub villain_action: Action,
     #[clap(name = "BOARD")]
     pub board: Board,
+}
+
+impl Opts {
+    pub fn create_hero_and_villain(&self) -> Result<(Player, Player), String> {
+        let hero = Player::new(
+            Some(self.hand.hand.clone()),
+            self.hero_position.clone(),
+            self.villain_positon.clone(),
+            self.villain_action.clone(),
+        );
+        let villain = Player::new(
+            None,
+            self.villain_positon,
+            self.hero_position,
+            self.villain_action.to_hero_action(),
+        );
+        match (hero, villain) {
+            (Ok(hero), Ok(villain)) => Ok((hero, villain)),
+            (_, _) => Err(String::from("Can't create Player model.")),
+        }
+    }
+
+    pub fn create_available_cards(&self) -> Result<Cards, ()> {
+        Ok(self.hand.cards.clone() + self.board.cards.clone())
+    }
 }
 
 #[derive(Debug)]
