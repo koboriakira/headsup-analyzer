@@ -31,15 +31,12 @@ impl FromStr for Cards {
             .collect::<Vec<char>>()
             .chunks(2)
             .try_fold(vec![], |mut cards, chars| {
-                let card = Value::from_char(chars[0]).and_then(|value| {
-                    Suit::from_char(chars[1]).and_then(|suit| Some(Card { value, suit }))
-                });
-                match card {
-                    Some(card) => {
-                        cards.push(card);
+                match (Value::from_char(chars[0]), Suit::from_char(chars[1])) {
+                    (Some(value), Some(suit)) => {
+                        cards.push(Card { value, suit });
                         Ok(cards)
                     }
-                    None => Err("Can't convert chars to Card"),
+                    (_, _) => Err("Can't convert chars to Card"),
                 }
             })
             .and_then(|cards| {
