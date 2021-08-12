@@ -7,5 +7,8 @@ fn main() {
     let madehand = available_cards.analyze_madehand();
     println!("{:?}", madehand);
 
+    let drawhands = available_cards.analyse_drawhand();
+    println!("{:?}", drawhands);
+
     analyse(hero.hand_range, villain.hand_range, &opts.board);
 }
