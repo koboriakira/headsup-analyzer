@@ -17,6 +17,9 @@ pub mod argparse;
 pub mod madehand;
 
 pub mod straight;
+
+pub mod range;
+
 #[cfg(test)]
 mod tests {
     #[test]
