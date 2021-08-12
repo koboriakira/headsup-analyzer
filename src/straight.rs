@@ -1,4 +1,6 @@
-fn get_straight_patterns() -> Vec<[Value; 5]> {
+use rs_poker::core::Value;
+
+pub fn get_straight_patterns() -> Vec<[Value; 5]> {
     let mut result = Vec::new();
     result.push([
         Value::Ace,
