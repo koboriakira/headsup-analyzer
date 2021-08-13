@@ -24,14 +24,13 @@ fn main() {
                 let vars = args.trim().split(' ').collect::<Vec<_>>();
                 if vars[0] == "exit" {
                     exit(0);
-                } else if vars.len() != 2 {
-                    println!("Invalid args.");
                 } else {
-                    let position = Position::from(&vars[0]);
-                    if position.is_ok() {
-                        hand_analyse(position.unwrap(), vars[1].to_string());
-                    } else {
-                        println!("Invalid args.");
+                    match vars.len() {
+                        1 | 2 => {
+                            let position = vars.get(1).and_then(|var| Position::from(&vars[1]));
+                            hand_analyse(position, vars[0].to_string());
+                        }
+                        _ => println!("Invalid args."),
                     }
                 }
             }
@@ -39,7 +38,7 @@ fn main() {
     }
 }
 
-fn hand_analyse(position: Position, hand: String) -> () {
+fn hand_analyse(position: Option<Position>, hand: String) -> () {
     let sample_combos = HandRange::from_string(hand.clone()).hands;
     // println!("{:?}", sample_combos);
     // let hand_model = rs_poker::core::Hand::new_from_str(&self.hand).unwrap();
@@ -48,7 +47,10 @@ fn hand_analyse(position: Position, hand: String) -> () {
     let ip_or_oop = [Position::IP, Position::OOP];
     range::read_ranges()
         .iter()
-        .filter(|range| ip_or_oop.contains(&range.me) || position == range.me)
+        .filter(|range| match position {
+            None => true,
+            Some(position) => ip_or_oop.contains(&range.me) || position == range.me,
+        })
         .filter(|range| {
             // println!("{:?}", &range.name);
             // // println!("{:?}", &range.hand_range.hands);

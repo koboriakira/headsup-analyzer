@@ -13,10 +13,13 @@ pub enum Position {
 }
 
 impl Position {
-    pub fn from(s: &str) -> Result<Position, String> {
+    pub fn from(s: &str) -> Option<Position> {
         match Position::from_str(s) {
-            Ok(pos) => Ok(pos),
-            Err(err) => Err(err),
+            Ok(pos) => Some(pos),
+            Err(err) => {
+                println!("{}", err);
+                None
+            }
         }
     }
 }
