@@ -12,6 +12,15 @@ pub enum Position {
     NONE,
 }
 
+impl Position {
+    pub fn from(s: &str) -> Result<Position, String> {
+        match Position::from_str(s) {
+            Ok(pos) => Ok(pos),
+            Err(err) => Err(err),
+        }
+    }
+}
+
 impl FromStr for Position {
     type Err = String;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
