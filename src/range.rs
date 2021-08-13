@@ -1,3 +1,5 @@
+use itertools::Itertools;
+use rs_poker::core::Hand;
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
 use std::{fs::File, io::BufReader, str::FromStr};
@@ -8,11 +10,12 @@ use crate::{action::Action, position::Position};
 
 #[derive(Debug)]
 pub struct Range {
-    name: String,
+    pub name: String,
     action: Action,
     me: Position,
     opponent: Position,
     pub hand_range: HandRange,
+    pub hands: Vec<Hand>,
 }
 
 impl Range {}
@@ -37,6 +40,12 @@ impl Pattern {
         let me = Position::from_str(&self.me);
         let opponent = Position::from_str(&self.opponent);
         let hand_range = HandRange::from_string(self.hands.clone());
+        let hands: Vec<Hand> = hand_range
+            .hands
+            .clone()
+            .into_iter()
+            .map(|combo| Hand::new_from_str(&combo.to_string()).unwrap())
+            .collect();
         match (action, me, opponent, hand_range) {
             (Ok(action), Ok(me), Ok(opponent), hand_range) => Range {
                 name: self.name.clone(),
@@ -44,13 +53,14 @@ impl Pattern {
                 me: me,
                 opponent: opponent,
                 hand_range: hand_range,
+                hands: hands,
             },
             (_, _, _, _) => panic!("invalid pattern"),
         }
     }
 }
 
-fn read_ranges() -> Vec<Range> {
+pub fn read_ranges() -> Vec<Range> {
     let json_model = read_json_file();
     json_model
         .patterns

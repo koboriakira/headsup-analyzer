@@ -20,10 +20,11 @@ pub struct Patterns {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Pattern {
-    position: String,
-    villain: String,
     action: String,
+    opponent: String,
+    me: String,
     hands: String,
+    name: String,
 }
 
 impl Player {
@@ -70,10 +71,10 @@ fn get_hand_range(
 ) -> Result<HandRange> {
     let json = load_json()?;
     let pattern = json.patterns.into_iter().find(|p| {
-        if !Position::from_str(&p.position).unwrap().eq(hero_position) {
+        if !Position::from_str(&p.me).unwrap().eq(hero_position) {
             return false;
         }
-        if !Position::from_str(&p.villain).unwrap().eq(villain_positon) {
+        if !Position::from_str(&p.opponent).unwrap().eq(villain_positon) {
             return false;
         }
         if !Action::from_str(&p.action).unwrap().eq(hero_action) {
