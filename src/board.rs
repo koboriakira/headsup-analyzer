@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use crate::cards::Cards;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Board {
     pub cards: Cards,
 }

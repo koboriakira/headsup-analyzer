@@ -20,6 +20,8 @@ pub mod straight;
 
 pub mod range;
 
+pub mod hand_wrapper;
+
 #[cfg(test)]
 mod tests {
     #[test]
