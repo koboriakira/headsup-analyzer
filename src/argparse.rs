@@ -40,7 +40,8 @@ impl Opts {
         );
         match (hero, villain) {
             (Ok(hero), Ok(villain)) => Ok((hero, villain)),
-            (_, _) => Err(String::from("Can't create Player model.")),
+            (Err(error), _) => Err(error.to_string()),
+            (_, Err(error)) => Err(error.to_string()),
         }
     }
 
