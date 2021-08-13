@@ -7,8 +7,8 @@ fn main() {
     let opts = arg_parse();
     // println!("{:?}", opts);
 
-    match opts.sub_command.clone() {
+    match opts.sub_command {
         SubCommand::Duel(duel) => duel.analyse(),
-        SubCommand::Hand(hand) => println!("{}", "Selected Hand subcommand"),
+        SubCommand::Hand(hand) => hand.analyse(),
     }
 }

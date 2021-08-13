@@ -1,11 +1,11 @@
 {
   "patterns": [
-    { 
+    {
       "name": "UTGオープン",
       "action": "open",
       "me": "utg",
       "opponent": "none",
-      "hands": "ATo+,A8s+,A4s-A5s,77+,KJo+,K9s+,QTs+,JTs"
+      "hands": "ATo+,A8s+,A4s,A5s,77+,KJo+,K9s+,QTs+,JTs"
     },
     {
       "name": "MPオープン",
@@ -40,154 +40,154 @@
       "action": "call",
       "me": "mp",
       "opponent": "utg",
-      "hands": "JJ-99,AQs-AJs,KQs"
+      "hands": "JJ,TT,99,AQs,AJs,KQs"
     },
     {
       "name": "COコール vs UTG(EP)",
       "action": "call",
       "me": "co",
       "opponent": "utg",
-      "hands": "JJ-99,AQs-AJs,KQs"
+      "hands": "JJ,TT,99,AQs,AJs,KQs"
     },
     {
       "name": "COコール vs MP(EP)",
       "action": "call",
       "me": "co",
       "opponent": "mp",
-      "hands": "JJ-99,AQs-AJs,KQs"
+      "hands": "JJ,99,AQs,AJs,KQs"
     },
     {
       "name": "BTNコール vs UTG(EP)",
       "action": "call",
       "me": "btn",
       "opponent": "utg",
-      "hands": "TT-88,AQs-ATs,AQo-AJo,KQs-KJs,KQo,QJs,JTs"
+      "hands": "TT,99,88,AQs,AJs,ATs,AQo,AJo,KQs,KJs,KQo,QJs,JTs"
     },
     {
       "name": "BTNコール vs MP(EP)",
       "action": "call",
       "me": "btn",
       "opponent": "mp",
-      "hands": "TT-88,AQs-ATs,AQo-AJo,KQs-KJs,KQo,QJs,JTs"
+      "hands": "TT,99,88,AQs,AJs,ATs,AQo,AJo,KQs,KJs,KQo,QJs,JTs"
     },
     {
       "name": "BTNコール vs CO",
       "action": "call",
       "me": "btn",
       "opponent": "co",
-      "hands": "99-77,AJs-ATs,AQo,QJs,JTs"
+      "hands": "99,88,77,AJs,ATs,AQo,QJs,JTs"
     },
     {
       "name": "SBコール vs UTG(EP)",
       "action": "call",
       "me": "sb",
       "opponent": "utg",
-      "hands": "99-77,KJs"
+      "hands": "99,88,77,KJs"
     },
     {
       "name": "SBコール vs MP(EP)",
       "action": "call",
       "me": "sb",
       "opponent": "mp",
-      "hands": "99-77,KJs"
+      "hands": "99,88,77,KJs"
     },
     {
       "name": "BBコール vs UTG(EP)",
       "action": "call",
       "me": "bb",
       "opponent": "utg",
-      "hands": "JJ-,AQs-,AQo-ATo,KQs-K9s,KQo,QJs-Q9s,JTs-J9s,T9s-T8s,98s-97s,87s-86s,76s-75s,65s-64s,54s"
+      "hands": "JJ,TT,99,88,77,66,55,44,33,22,AQs,AJs,ATs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,AQo,AJo,ATo,K9s+,KQo,Q9s+,J9s+,T8s+,97s+,86s+,75s+,64s+,54s"
     },
     {
       "name": "BBコール vs MP(EP)",
       "action": "call",
       "me": "bb",
       "opponent": "mp",
-      "hands": "JJ-,AQs-,AQo-ATo,KQs-K9s,KQo,QJs-Q9s,JTs-J9s,T9s-T8s,98s-97s,87s-86s,76s-75s,65s-64s,54s"
+      "hands": "JJ,TT,99,88,77,66,55,44,33,22,AQs,AJs,ATs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,AQo,AJo,ATo,K9s+,KQo,Q9s+,J9s+,T8s+,97s+,86s+,75s+,64s+,54s"
     },
     {
       "name": "BBコール vs CO",
       "action": "call",
       "me": "bb",
       "opponent": "co",
-      "hands": "TT-22,AJs-A6s,A3s-A2s,AQo-ATo,KQs-K7s,KQo-KJo,QJs-Q8s,QJo,JTs-J8s,T9s-T8s,T9s-T8s,98s-97s,87s-86s,76s-75s,65s-64s,54s"
+      "hands": "TT,99,88,77,66,55,44,33,22,AJs,ATs,A9s,A8s,A7s,A6s,A3s,A2s,AQo,AJo,ATo,K7s+,KJo+,Q8s+,QJo,J8s+,T8s+,97s+,86s+,75s+,64s+,54s"
     },
     {
       "name": "BBコール vs BTN",
       "action": "call",
       "me": "bb",
       "opponent": "btn",
-      "hands": "77-,A9s-A6s,AQo-A9o,KTs-K5s,KQo-KTo,QTs-Q7s,QJo-QTo,J9s-J8s,JTo,T9s-T7s,98s-97s,87s-86s,76s-75s,65s-64s,54s-53s,43s"
+      "hands": "77,66,55,44,33,22,A9s,A8s,A7s,A6s,AQo,AJo,ATo,A9o,K5s+,KT+o,Q7s+,QTo+,J8s+,JTo,T7s+,97s+,86s+,75s+,64s+,54s,43s"
     },
     {
       "name": "BBコール vs SB",
       "action": "call",
       "me": "bb",
       "opponent": "sb",
-      "hands": "77-22,A9s-A2s,AJo-ATo,K9s-K2s,KQo-K7o,QTs-Q2s,QJo-Q8o,J9s-J3s,JTo-J8o,T8s-T4s,T9o-T8o,98s-94s,98o-97o,87s-84s,87o,76s-74s,65s-63s,54s-52s,43s-42s,32s"
+      "hands": "77,66,55,44,33,22,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,AJo,ATo,K9s,K8s,K7s,K6s,K5s,K4s,K3s,K2s,K7o+,QTs,Q9s,Q8s,Q7s,Q6s,Q5s,Q4s,Q3s,Q2s,Q8o+,J9s,J8s,J7s,J6s,J5s,J4s,J3s,J8o+,T8s,T7s,T6s,T5s,T4s,T8o+,94s+,97o+,84s+,87o,74s+,63s+,52s+,42s+,32s"
     },
     {
       "name": "MP3bet vs UTG",
       "action": "3bet",
       "me": "mp",
       "opponent": "utg",
-      "hands": "AA-QQ,AKs-ATs,A5s-A4s,AKo-AQo,KQs-KJs"
+      "hands": "AA,KK,QQ,ATs+,A5s,A4s,AQo+,KQs,KJs"
     },
     {
       "name": "CO3bet vs UTG(EP)",
       "action": "3bet",
       "me": "co",
       "opponent": "utg",
-      "hands": "AA-QQ,AKs-ATs,A5s-A4s,AKo-AQo,KJs,65s,54s"
+      "hands": "AA,KK,QQ,ATs+,A5s,A4s,AQo+,KJs,65s,54s"
     },
     {
       "name": "CO3bet vs MP(EP)",
       "action": "3bet",
       "me": "co",
       "opponent": "mp",
-      "hands": "AA-QQ,AKs-ATs,A5s-A4s,AKo-AQo,KJs,65s,54s"
+      "hands": "AA,KK,QQ,ATs+,A5s,A4s,AQo+,KJs,65s,54s"
     },
     {
       "name": "BTN3bet vs UTG(EP)",
       "action": "3bet",
       "me": "btn",
       "opponent": "utg",
-      "hands": "JJ+,AKs,A5s-A4s,AKo,AJo,KTs,KQo,76s,65s,54s"
+      "hands": "JJ+,AKs,A5s,A4s,AKo,AJo,KTs,KQo,76s,65s,54s"
     },
     {
       "name": "BTN3bet vs MP(EP)",
       "action": "3bet",
       "me": "btn",
       "opponent": "mp",
-      "hands": "JJ+,AKs,A5s-A4s,AKo,AJo,KTs,KQo,76s,65s,54s"
+      "hands": "JJ+,AKs,A5s,A4s,AKo,AJo,KTs,KQo,76s,65s,54s"
     },
     {
       "name": "BTN3bet vs CO",
       "action": "3bet",
       "me": "btn",
       "opponent": "co",
-      "hands": "TT+,AKs-AQs,A9s-A8s,A5s-A2s,AKo,AJo,KTs,KQo,76s,65s,54s"
+      "hands": "TT+,AQs+,A9s,A8s,A5s,A4s,A3s,A2s,AKo,AJo,KTs,KQo,76s,65s,54s"
     },
     {
       "name": "SB3bet vs UTG(EP)",
       "action": "3bet",
       "me": "sb",
       "opponent": "utg",
-      "hands": "TT+,AKs-ATs,A5s-A4s,AKo-AQo,KQs"
+      "hands": "TT+,ATs+,A5s,A4s,AQo+,KQs"
     },
     {
       "name": "SB3bet vs MP(EP)",
       "action": "3bet",
       "me": "sb",
       "opponent": "mp",
-      "hands": "TT+,AKs-ATs,A5s-A4s,AKo-AQo,KQs"
+      "hands": "TT+,ATs+,A5s,A4s,AQo+,KQs"
     },
     {
       "name": "SB3bet vs CO",
       "action": "3bet",
       "me": "sb",
       "opponent": "co",
-      "hands": "66+,AKs-A8s,A5s-A3s,AKo-AJo,KQs-KTs,KQo"
+      "hands": "66+,A8s+,A5s,A4s,A3s,AJo+,KTs+,KQo"
     },
     {
       "name": "SB3bet vs BTN",
@@ -201,42 +201,42 @@
       "action": "3bet",
       "me": "bb",
       "opponent": "utg",
-      "hands": "QQ+,AKs,ATs,A5s-A4s,AKo,ATo,K9s"
+      "hands": "QQ+,AKs,ATs,A5s,A4s,AKo,ATo,K9s"
     },
     {
       "name": "BB3bet vs MP(EP)",
       "action": "3bet",
       "me": "bb",
       "opponent": "mp",
-      "hands": "QQ+,AKs,ATs,A5s-A4s,AKo,ATo,K9s"
+      "hands": "QQ+,AKs,ATs,A5s,A4s,AKo,ATo,K9s"
     },
     {
       "name": "BB3bet vs CO",
       "action": "3bet",
       "me": "bb",
       "opponent": "co",
-      "hands": "JJ+,AKs-AQs,A5s-A4s,AKo,A5o,K6s-K4s,KTo,Q7s-Q6s"
+      "hands": "JJ+,AQs+,A5s,A4s,AKo,A5o,K6s,K5s,K4s,KTo,Q7s,Q6s"
     },
     {
       "name": "BB3bet vs BTN",
       "action": "3bet",
       "me": "bb",
       "opponent": "btn",
-      "hands": "88+,ATs+,A5s-A4s,AQo+,A8o,A5o,KJs+,K4s-K2s,K9o,QJs+,JTs+,J7s,T9o"
+      "hands": "88+,ATs+,A5s,A4s,AQo+,A8o,A5o,KJs+,K4s,K3s,K2s,K9o,QJs+,JTs+,J7s,T9o"
     },
     {
       "name": "BB3bet vs SB",
       "action": "3bet",
       "me": "bb",
       "opponent": "sb",
-      "hands": "88+,ATs+,AQo+,A5o-A4o,KTs+,QJs,JTs,J2s,T9s,T3s-T2s,93s,83s,73s-72s,62s"
+      "hands": "88+,ATs+,AQo+,A5o,A4o,KTs+,QJs,JTs,J2s,T9s,T3s,T2s,93s,83s,73s,72s,62s"
     },
     {
       "name": "IP3betコール",
       "action": "3betcall",
       "me": "ip",
       "opponent": "oop",
-      "hands": "QQ-55,AKs-A9s,A5s-A4s,AKo-AQo,KQs-KTs,QJs-QTs,JTs,T9s,76s,65s,54s"
+      "hands": "QQ,JJ,TT,99,88,77,66,55,A9s+,A5s,A4s,AQo+,KTs+,QTs+,JTs,T9s,76s,65s,54s"
     },
     {
       "name": "IP3betコール(nit)",
@@ -244,14 +244,14 @@
       "me": "ip",
       "opponent": "oop",
       "option": "nit",
-      "hands": "KK-66,AKo,AKs-ATs,KQs,QJs,JTs"
+      "hands": "KK,QQ,JJ,TT,99,88,77,66,AKo,ATs+,KQs,QJs,JTs"
     },
     {
       "name": "OOP3betコール",
       "action": "3betcall",
       "me": "oop",
       "opponent": "ip",
-      "hands": "QQ-66,AQs,ATs,AKo,KJs,QJs,JTs"
+      "hands": "QQ,JJ,TT,99,88,77,66,AQs,ATs,AKo,KJs,QJs,JTs"
     },
     {
       "name": "OOP3betコール(nit)",
@@ -259,14 +259,14 @@
       "me": "oop",
       "opponent": "ip",
       "option": "nit",
-      "hands": "QQ-JJ,AKo"
+      "hands": "QQ,JJ,AKo"
     },
     {
       "name": "IP4bet",
       "action": "4bet",
       "me": "ip",
       "opponent": "oop",
-      "hands": "AA,KK,A7s-A6s,K9s"
+      "hands": "KK+,A7s,A6s,K9s"
     },
     {
       "name": "IP4bet(nit)",
@@ -282,7 +282,7 @@
       "me": "oop",
       "opponent": "ip",
       "option": "nit",
-      "hands": "AA-KK,AKs,AJs,KQs"
+      "hands": "KK+,AKs,AJs,KQs"
     },
     {
       "name": "OOP4bet(nit)",
@@ -290,14 +290,14 @@
       "me": "oop",
       "opponent": "ip",
       "option": "nit",
-      "hands": "AA-KK,AKs-AQs"
+      "hands": "KK+,AQs+"
     },
     {
       "name": "IP4betコール",
       "action": "4betcall",
       "me": "ip",
       "opponent": "oop",
-      "hands": "AA-KK"
+      "hands": "KK+"
     },
     {
       "name": "IP4betコール(nit)",
@@ -312,7 +312,7 @@
       "action": "4betcall",
       "me": "oop",
       "opponent": "ip",
-      "hands": "AA-KK,AKs"
+      "hands": "KK+,AKs"
     },
     {
       "name": "OOP4betコール(nit)",
@@ -320,7 +320,7 @@
       "me": "oop",
       "opponent": "ip",
       "option": "nit",
-      "hands": "AA-KK,AKs"
+      "hands": "KK+,AKs"
     },
     {
       "name": "リンパー",

@@ -1,12 +1,13 @@
 use std::str::FromStr;
 
 use clap::Clap;
+use rust_poker::hand_range::HandRange;
 
 use crate::{
     action::Action, analyse, board::Board, cards::Cards, hand_wrapper::HandWrapper, player::Player,
-    position::Position,
+    position::Position, range,
 };
-#[derive(Clap, Clone)]
+#[derive(Clap)]
 #[clap(
     name = "Heads-Up Analyzer",
     version = "1.0.0",
@@ -18,7 +19,7 @@ pub struct Opts {
     pub sub_command: SubCommand,
 }
 
-#[derive(Clap, Clone)]
+#[derive(Clap)]
 pub enum SubCommand {
     #[clap(version = "1.0")]
     Hand(Hand),
@@ -26,7 +27,7 @@ pub enum SubCommand {
     Duel(Duel),
 }
 
-#[derive(Clap, Clone)]
+#[derive(Clap)]
 pub struct Duel {
     #[clap(name = "YOUR_POSITION")]
     pub hero_position: Position,
@@ -40,12 +41,45 @@ pub struct Duel {
     pub board: Board,
 }
 
-#[derive(Clap, Clone)]
+#[derive(Clap)]
 pub struct Hand {
     #[clap(name = "YOUR_POSITION")]
     pub hero_position: Position,
     #[clap(name = "YOUR_CARDS")]
-    pub hand: HandWrapper,
+    pub hand: String,
+}
+
+impl Hand {
+    pub fn analyse(&self) {
+        let sample_combos = HandRange::from_string(self.hand.clone()).hands;
+        // println!("{:?}", sample_combos);
+        // let hand_model = rs_poker::core::Hand::new_from_str(&self.hand).unwrap();
+        // println!("Position: {:?}", self.hero_position);
+        // println!("sample_combo: {:?}", &sample_combo);
+        let ip_or_oop = [Position::IP, Position::OOP];
+        range::read_ranges()
+            .iter()
+            .filter(|range| ip_or_oop.contains(&range.me) || self.hero_position == range.me)
+            .filter(|range| {
+                // println!("{:?}", &range.name);
+                // // println!("{:?}", &range.hand_range.hands);
+                // range
+                //     .hand_range
+                //     .hands
+                //     .iter()
+                //     .for_each(|combo| print!("{}, ", &combo.to_string()));
+                // println!("");
+                sample_combos
+                    .iter()
+                    .all(|combo| range.hand_range.hands.contains(&combo))
+                // range
+                //     .hand_range
+                //     .hands
+                //     .iter()
+                //     .any(|combo| combo == &sample_combo)
+            })
+            .for_each(|range| println!("{}", range.name));
+    }
 }
 
 impl Duel {
