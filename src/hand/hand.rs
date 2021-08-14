@@ -21,7 +21,7 @@ impl Hand {
             } else {
                 match vars.len() {
                     1 | 2 => {
-                        let position = vars.get(1).and_then(|var| Position::from(&vars[1]));
+                        let position = vars.get(1).and_then(|var| Position::from(var));
                         hand_analyse(position, vars[0].to_string());
                     }
                     _ => println!("Invalid args."),
