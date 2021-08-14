@@ -16,9 +16,8 @@ pub fn calculate_straight_draws(values: Vec<Value>) -> Vec<DrawHand> {
     let straight_draws = straight::get_straight_patterns()
         .into_iter()
         .map(|pattern| {
-            let (matched, unmatched): (Vec<Value>, Vec<Value>) = pattern
-                .into_iter()
-                .partition(|value| values.contains(value));
+            let (matched, unmatched): (Vec<Value>, Vec<Value>) =
+                pattern.iter().partition(|value| values.contains(value));
             match matched.len() {
                 4 => Some(DrawHand::StraightDraw(unmatched[0])),
                 3 => Some(DrawHand::BackDoorStraightDraw(unmatched[0], unmatched[1])),
@@ -31,7 +30,7 @@ pub fn calculate_straight_draws(values: Vec<Value>) -> Vec<DrawHand> {
         .clone()
         .into_iter()
         .filter(|&draw_hand| match draw_hand {
-            DrawHand::StraightDraw(n) => true,
+            DrawHand::StraightDraw(_n) => true,
             _ => false,
         })
         .collect();
@@ -41,7 +40,7 @@ pub fn calculate_straight_draws(values: Vec<Value>) -> Vec<DrawHand> {
     let back_door_straight_draw: Vec<DrawHand> = straight_draws
         .into_iter()
         .filter(|&draw_hand| match draw_hand {
-            DrawHand::BackDoorStraightDraw(n, m) => true,
+            DrawHand::BackDoorStraightDraw(_n, _m) => true,
             _ => false,
         })
         .collect();
