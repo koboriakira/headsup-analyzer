@@ -1,14 +1,7 @@
-use std::process::exit;
+use headsup_analyzer::argparse::{arg_parse, Hand, SubCommand};
+use headsup_analyzer::duel::duel::Duel;
 
-use headsup_analyzer::{
-    analyse::analyse,
-    argparse::{arg_parse, Hand, SubCommand},
-    cards::Cards,
-    hand,
-    position::Position,
-    range,
-};
-
+use headsup_analyzer::hand;
 use rust_poker::hand_range::HandRange;
 fn main() {
     let opts = arg_parse();

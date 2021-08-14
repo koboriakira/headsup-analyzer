@@ -1,5 +1,5 @@
 ```
-rustup run nightly cargo run hand btn AKs
+rustup run nightly cargo run hand
 ```
 
 

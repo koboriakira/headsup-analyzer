@@ -2,8 +2,6 @@ pub mod drawhand;
 
 pub mod board;
 
-pub mod analyse;
-
 pub mod player;
 
 pub mod position;
@@ -23,3 +21,5 @@ pub mod range;
 pub mod hand_wrapper;
 
 pub mod hand;
+
+pub mod duel;
