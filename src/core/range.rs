@@ -1,23 +1,46 @@
 use rs_poker::core::Hand;
 use serde::{Deserialize, Serialize};
 
-use std::{fs::File, io::BufReader, str::FromStr};
+use std::{fmt::format, fs::File, io::BufReader, str::FromStr};
 
-use rust_poker::hand_range::HandRange;
+use rust_poker::hand_range::{Combo, HandRange};
 
 use crate::core::{action::Action, position::Position};
 
 #[derive(Debug)]
 pub struct Range {
-    pub name: String,
+    name: String,
     action: Action,
-    pub me: Position,
+    me: Position,
     opponent: Position,
-    pub hand_range: HandRange,
-    pub hands: Vec<Hand>,
+    hand_range: HandRange,
+    hands: Vec<Hand>,
 }
 
-impl Range {}
+impl Range {
+    pub fn equals_me(&self, position: Position) -> bool {
+        self.me == position
+    }
+
+    pub fn is_ip_or_oop(&self) -> bool {
+        [Position::IP, Position::OOP].contains(&self.me)
+    }
+
+    pub fn contains_combo(&self, combo: &Combo) -> bool {
+        self.hand_range.hands.contains(&combo)
+    }
+
+    pub fn to_string(&self, verbose: Option<bool>) -> String {
+        let opponent = if self.opponent.is_none() {
+            "".to_string()
+        } else {
+            format!("vs {}", self.opponent)
+        };
+        format!("- {} {} {}", self.me, self.action, opponent)
+            .trim()
+            .to_string()
+    }
+}
 
 #[derive(Serialize, Deserialize)]
 struct JsonModel {
@@ -432,5 +455,33 @@ mod tests {
         let ranges = read_ranges();
         println!("{:#?}", ranges[0].hand_range);
         assert_eq!(ranges.len(), 46);
+    }
+
+    #[test]
+    fn test_to_string() {
+        let pattern = Pattern {
+            name: "BTN3bet vs MP(EP)".to_string(),
+            action: "3bet".to_string(),
+            me: "btn".to_string(),
+            opponent: "mp".to_string(),
+            hands: "JJ+,AKs,A5s,A4s,AKo,AJo,KTs,KQo,76s,65s,54s".to_string(),
+        };
+        let range = pattern.to_range();
+
+        assert_eq!(range.to_string(None), "- BTN 3bet vs MP".to_string());
+    }
+
+    #[test]
+    fn test_to_string_utg_open() {
+        let pattern = Pattern {
+            name: "UTGオープン".to_string(),
+            action: "open".to_string(),
+            me: "utg".to_string(),
+            opponent: "none".to_string(),
+            hands: "ATo+,A8s+,A4s,A5s,77+,KJo+,K9s+,QTs+,JTs".to_string(),
+        };
+        let range = pattern.to_range();
+
+        assert_eq!(range.to_string(None), "- UTG Open".to_string());
     }
 }

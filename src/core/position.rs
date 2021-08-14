@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use std::{fmt, str::FromStr};
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub enum Position {
     SB,
@@ -22,6 +22,10 @@ impl Position {
             }
         }
     }
+
+    pub fn is_none(&self) -> bool {
+        self == &Position::NONE
+    }
 }
 
 impl FromStr for Position {
@@ -39,6 +43,23 @@ impl FromStr for Position {
             "NONE" => Ok(Self::NONE),
             _ => return Err(format!("Invalid position: {}", s)),
         }
+    }
+}
+
+impl fmt::Display for Position {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let string = match self {
+            &Position::BB => "BB",
+            &Position::UTG => "UTG",
+            &Position::MP => "MP",
+            &Position::CO => "CO",
+            &Position::BTN => "BTN",
+            &Position::SB => "SB",
+            &Position::OOP => "OOP",
+            &Position::IP => "IP",
+            &Position::NONE => "NONE",
+        };
+        write!(f, "{}", string)
     }
 }
 

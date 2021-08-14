@@ -32,34 +32,17 @@ impl Hand {
 }
 fn hand_analyse(position: Option<Position>, hand: String) -> () {
     let sample_combos = HandRange::from_string(hand.clone()).hands;
-    // println!("{:?}", sample_combos);
-    // let hand_model = rs_poker::core::Hand::new_from_str(&self.hand).unwrap();
-    // println!("Position: {:?}", self.hero_position);
-    // println!("sample_combo: {:?}", &sample_combo);
-    let ip_or_oop = [Position::IP, Position::OOP];
+
     range::read_ranges()
         .iter()
         .filter(|range| match position {
             None => true,
-            Some(position) => ip_or_oop.contains(&range.me) || position == range.me,
+            Some(position) => range.is_ip_or_oop() || range.equals_me(position),
         })
         .filter(|range| {
-            // println!("{:?}", &range.name);
-            // // println!("{:?}", &range.hand_range.hands);
-            // range
-            //     .hand_range
-            //     .hands
-            //     .iter()
-            //     .for_each(|combo| print!("{}, ", &combo.to_string()));
-            // println!("");
             sample_combos
                 .iter()
-                .all(|combo| range.hand_range.hands.contains(&combo))
-            // range
-            //     .hand_range
-            //     .hands
-            //     .iter()
-            //     .any(|combo| combo == &sample_combo)
+                .all(|combo| range.contains_combo(combo))
         })
-        .for_each(|range| println!("{}", range.name));
+        .for_each(|range| println!("{}", range.to_string(None)));
 }

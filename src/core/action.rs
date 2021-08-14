@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use std::{fmt, str::FromStr};
 #[derive(Debug, PartialEq, PartialOrd, Clone, Copy)]
 pub enum Action {
     Open,
@@ -44,5 +44,20 @@ impl Action {
             Self::ThreeBetCall | Self::FourBet | Self::FourBetCall => true,
             _ => false,
         }
+    }
+}
+
+impl fmt::Display for Action {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let string = match self {
+            &Action::Call => "Call",
+            &Action::Limp => "Limp",
+            &Action::Open => "Open",
+            &Action::ThreeBet => "3bet",
+            &Action::ThreeBetCall => "3bet call",
+            &Action::FourBet => "4bet",
+            &Action::FourBetCall => "4bet call",
+        };
+        write!(f, "{}", string)
     }
 }
