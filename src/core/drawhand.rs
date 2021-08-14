@@ -1,6 +1,6 @@
 use rs_poker::core::{Suit, Value};
 
-use crate::straight;
+use crate::core::straight;
 
 #[derive(Debug, PartialEq, PartialOrd, Eq, Ord, Clone, Copy)]
 pub enum DrawHand {
@@ -55,7 +55,7 @@ pub fn calculate_straight_draws(values: Vec<Value>) -> Vec<DrawHand> {
 mod tests {
     use std::str::FromStr;
 
-    use crate::cards::Cards;
+    use crate::core::cards::Cards;
 
     use super::*;
 

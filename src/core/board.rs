@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use crate::cards::Cards;
+use crate::core::cards::Cards;
 
 #[derive(Debug, Clone)]
 pub struct Board {

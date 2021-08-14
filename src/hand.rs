@@ -1,1 +1,1 @@
-pub mod analyse;
+pub mod hand;

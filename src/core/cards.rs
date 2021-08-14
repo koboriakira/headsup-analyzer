@@ -7,10 +7,7 @@ use std::{
 use anyhow::Result;
 use rs_poker::core::{Card, Suit, Value};
 
-use crate::{
-    drawhand::{self, DrawHand},
-    madehand::{self, MadeHand},
-};
+use crate::core::{drawhand::calculate_straight_draws, drawhand::DrawHand, madehand::MadeHand};
 #[derive(Debug, Clone)]
 pub struct Cards {
     pub cards: Vec<Card>,
@@ -148,7 +145,7 @@ impl Cards {
 
         // ストレートドロー
         let values = self.values();
-        let mut draw_hands = drawhand::calculate_straight_draws(values);
+        let mut draw_hands = calculate_straight_draws(values);
 
         result.append(&mut draw_hands);
         result

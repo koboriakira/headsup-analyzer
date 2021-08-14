@@ -6,7 +6,7 @@ use std::{fs::File, io::BufReader, str::FromStr};
 
 use rust_poker::hand_range::HandRange;
 
-use crate::{action::Action, position::Position};
+use crate::core::{action::Action, position::Position};
 
 #[derive(Debug)]
 pub struct Range {

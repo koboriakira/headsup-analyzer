@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use rs_poker::core::Hand;
 
-use crate::cards::Cards;
+use crate::core::cards::Cards;
 
 #[derive(Debug, Clone)]
 pub struct HandWrapper {
