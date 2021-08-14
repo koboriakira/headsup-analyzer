@@ -14,3 +14,7 @@ rustup run nightly cargo test
 ```
 rustup run nightly cargo build --release
 ```
+
+```
+rustup run nightly cargo fix --allow-dirty && rustup run nightly cargo fmt
+```
